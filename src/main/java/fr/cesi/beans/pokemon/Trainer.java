@@ -42,4 +42,13 @@ public class Trainer {
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
+
+    @Override
+    public String toString() {
+        return "Trainer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", firstname='" + firstname + '\'' +
+                '}';
+    }
 }

@@ -3,6 +3,8 @@ package fr.cesi.IHM;
 import fr.cesi.beans.pokemon.Pokemon;
 import fr.cesi.beans.pokemon.Trainer;
 import fr.cesi.beans.pokemon.Attack;
+import fr.cesi.service.GestionPokemon;
+import fr.cesi.service.GestionTrainer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -55,17 +57,13 @@ public class PokemonServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Dresseurs
-        trainers.add(new Trainer("GUYONNET", "Theo1"));
-        trainers.add(new Trainer("GUYONNET", "Theo2"));
+        GestionTrainer gestionTrainer = new GestionTrainer();
+        trainers = gestionTrainer.findAll();
         request.setAttribute("trainers", trainers);
 
-        // Attaques
-        Attack att01 = new Attack("statik", 17);
-        Attack att02 = new Attack("paratonnerre", 30);
-
         // Pokemons
-        pokemons.add(new Pokemon("Pikachu", 25,  1, trainers.get(0), att01, att02));
-        pokemons.add(new Pokemon("Gros Piakachu", 25,  5, trainers.get(1), att01, att02));
+        GestionPokemon gestionPokemon = new GestionPokemon();
+        pokemons = gestionPokemon.findAll();
         request.setAttribute("pokemons", pokemons);
 
         request.setAttribute("currentPokemon", pokemons.get(pokemonsIndex));

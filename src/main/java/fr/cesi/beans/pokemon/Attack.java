@@ -44,4 +44,13 @@ public class Attack {
     public void setStrenght(int strenght) {
         this.strenght = strenght;
     }
+
+    @Override
+    public String toString() {
+        return "Attack{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", strenght=" + strenght +
+                '}';
+    }
 }
