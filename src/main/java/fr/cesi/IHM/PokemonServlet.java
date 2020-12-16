@@ -5,6 +5,7 @@ import fr.cesi.beans.pokemon.Trainer;
 import fr.cesi.beans.pokemon.Attack;
 import fr.cesi.service.GestionPokemon;
 import fr.cesi.service.GestionTrainer;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,9 +23,15 @@ public class PokemonServlet extends HttpServlet {
     List<Pokemon> pokemons = new ArrayList<>();
     List<Trainer> trainers = new ArrayList<>();
 
+
     @Override
     public void init() throws ServletException {
         super.init();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+        GestionTrainer gestionTrainer = context.getBean("gestionTrainer", GestionTrainer.class);
+        GestionPokemon gestionPokemon = context.getBean("gestionPokemon", GestionPokemon.class);
+        trainers = gestionTrainer.findAll();
+        pokemons = gestionPokemon.findAll();
     }
 
     @Override
@@ -57,13 +64,9 @@ public class PokemonServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Dresseurs
-        GestionTrainer gestionTrainer = new GestionTrainer();
-        trainers = gestionTrainer.findAll();
         request.setAttribute("trainers", trainers);
 
         // Pokemons
-        GestionPokemon gestionPokemon = new GestionPokemon();
-        pokemons = gestionPokemon.findAll();
         request.setAttribute("pokemons", pokemons);
 
         request.setAttribute("currentPokemon", pokemons.get(pokemonsIndex));

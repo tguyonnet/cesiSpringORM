@@ -25,5 +25,4 @@ public class GestionTrainer {
     public void add(Trainer trainer) {
         dao.save(trainer);
     }
-
 }
