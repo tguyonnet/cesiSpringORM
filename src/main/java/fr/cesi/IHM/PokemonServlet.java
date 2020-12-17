@@ -27,9 +27,8 @@ public class PokemonServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-        GestionTrainer gestionTrainer = context.getBean("gestionTrainer", GestionTrainer.class);
-        GestionPokemon gestionPokemon = context.getBean("gestionPokemon", GestionPokemon.class);
+        GestionTrainer gestionTrainer = new GestionTrainer().getGestionTrainer();
+        GestionPokemon gestionPokemon = new GestionPokemon().getGGestionPokemon();
         trainers = gestionTrainer.findAll();
         pokemons = gestionPokemon.findAll();
     }

@@ -10,12 +10,16 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service(value = "gestionPokemon")
-public class GestionPokemon {
+public class GestionPokemon extends fr.cesi.service.Service {
     @Autowired
     PokemonDAO dao;
 
     @PersistenceContext
     private EntityManager em;
+
+    public GestionPokemon getGGestionPokemon() {
+        return this.getContext().getBean("gestionPokemon", GestionPokemon.class);
+    }
 
     public List<Pokemon> findAll() {
         return dao.findAll();

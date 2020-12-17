@@ -10,13 +10,17 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service(value = "gestionAttack")
-public class GestionAttack {
+public class GestionAttack extends fr.cesi.service.Service {
 
     @Autowired
     AttackDAO dao;
 
     @PersistenceContext
     private EntityManager em;
+
+    public GestionAttack getGestionAttack() {
+        return this.getContext().getBean("gestionAttack", GestionAttack.class);
+    }
 
     public List<Attack> findAll() {
         return dao.findAll();

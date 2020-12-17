@@ -10,16 +10,20 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service(value = "gestionTrainer")
-public class GestionTrainer {
-
+public class GestionTrainer extends fr.cesi.service.Service {
     @Autowired
     TrainerDAO dao;
 
     @PersistenceContext
     private EntityManager em;
 
+    public GestionTrainer getGestionTrainer() {
+        return this.getContext().getBean("gestionTrainer", GestionTrainer.class);
+    }
+
     public List<Trainer> findAll() {
         return dao.findAll();
+
     }
 
     public void add(Trainer trainer) {
